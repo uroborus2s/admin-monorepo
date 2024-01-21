@@ -1,0 +1,100 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
+  "plugins": ["@typescript-eslint", "import"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": [
+      "packages/*/tsconfig.json",
+      "examples/*/tsconfig.json",
+      "tsconfig.json"
+    ]
+  },
+  "settings": {
+    "import/extensions": [".js", "ts"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "node": {
+        "resolvePaths": ["node_modules/@types"],
+        "extensions": [".js", ".json", ".node", ".ts", ".d.ts"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": ["packages/*/tsconfig.json", "examplse/*/tsconfig.json"]
+      },
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".jsx", ".json", ".css"]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "error",
+    "no-underscore-dangle": "off",
+    "node/no-missing-import": "off",
+    "no-restricted-syntax": "off",
+    "no-restricted-exports": [
+      "error",
+      {
+        "restrictedNamedExports": []
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "extendDefaults": true,
+        "types": {
+          "{}": false
+        }
+      }
+    ],
+    "@typescript-eslint/no-empty-interface": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        //camelCase - 标准驼峰式格式——字符之间不允许有下划线，并且允许连续大写（即 myID 和 myId 都有效）。
+        //strictCamelCase - 与 camelCase 相同，但不允许连续大写（即 myId 有效，但 myID 无效）。
+        //PascalCase - 与 camelCase 相同，除了第一个字符必须大写。
+        //StrictPascalCase - 与 strictCamelCase 相同，除了第一个字符必须大写。
+        //snake_case - 标准 snake_case 格式——所有字符必须小写，并且允许使用下划线。
+        //UPPER_CASE - 与 snake_case 相同，除了所有字符必须大写。
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+        "filter": {
+          "regex": "^_",
+          "match": false
+        }
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
+        "css": "always" // 忽略 CSS 文件的扩展名
+      }
+    ],
+    "no-await-in-loop": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/dot-notation": [
+      "error",
+      {
+        "allowPattern": "^[a-z]+(_[a-z]+)+$"
+      }
+    ],
+    "import/no-extraneous-dependencies": "off"
+  }
+}
